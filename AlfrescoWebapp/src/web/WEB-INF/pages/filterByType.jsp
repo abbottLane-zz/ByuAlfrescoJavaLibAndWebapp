@@ -39,7 +39,7 @@
 
     <c:forEach var="i" begin="0" end="${numberOfResults}" >
         <c:if test="${i==numberOfResults || thumbUrlList[0]==null}">
-             <!-- leave empty...this just prevents a broken link image from showing up at the ned of our query result list -->
+             <!-- leave empty...this just prevents a broken link image from showing up at the end of our query result list -->
         </c:if>
         <c:if test="${i!=numberOfResults}">
             <a id="imgRef" title="${documentNames[i]}" href="${fullUrlList[i]}" >
