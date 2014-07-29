@@ -6,39 +6,23 @@
     <title>Alfresco Java Plugin Demo</title>
     <link href="<c:url value="/resources/css/theme.css" />" rel="stylesheet"/>
     <link rel="shortcut icon" href="https://www.byu.edu/templates/2.1.5/images/favicon.ico">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 <body>
-    <ul id="nav" class="tabs" data-tab>
-        <li class="tab-title active"><a href="<c:url value="/"/>"><b>Get by Path</b></a></li>
-        <li class="tab-title"><a href="<c:url value="/filterByType"/>"><b>Filter by file type</b></a></li>
-        <li class="tab-title"><a href="<c:url value="/upload"/>"><b>Upload</b></a></li>
-        <li class="tab-title"> <a href="<c:url value="/selectFromList"/>"><b>Select and Edit</b></a></li>
-        <li class="tab-title"><a href="<c:url value="/videoDemo"/>"><b>Video</b></a></li>
-    </ul>
-
-    <!-- form -->
-    <div id="form">
-    <p>Retrieve an Alfresco Document by typing the path to the document in the following form: </p>
-    <form:form method="POST" action="/">
-            <form:label path="Path">Path: </form:label>
-            <form:input path="Path"/><br>
-            <input type="submit" value="Submit"/>
-    </form:form>
-    </div>
-
-    <!-- results -->
-    <div id="results">
-        <c:if test="${docName!=null}">
-            <a href=${fullUrl}>
-                <img src=${thumbnail}/>
-            </a>
-            <p>
-                <b>Name: </b> ${docName} <br><br>
-                <b>Description: </b>${docDescription}<br><br>
-                <b>Thumbnail URL: </b> ${thumbnail}<br><br>
-                <b>Full Document URL: </b> ${fullUrl}<br><br>
-            </p>
-        </c:if>
+    <div class="container">
+        <h1>Users</h1>
+        <form:form method="post" action="login" commandName="user" role="form">
+        <div class="form-group">
+            <form:label path="user">First Name:</form:label>
+            <form:input path="user" class="form-control" placeholder="User"/>
+        </div>
+        <div class="form-group">
+            <form:label path="password">Last Name:</form:label>
+            <form:input path="password" class="form-control" placeholder="Password"/>
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+        </form:form>
     </div>
 
 </body>

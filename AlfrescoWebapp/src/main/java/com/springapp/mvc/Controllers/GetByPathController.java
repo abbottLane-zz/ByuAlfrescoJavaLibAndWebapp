@@ -19,12 +19,12 @@ public class GetByPathController {
 
     CMISSessionInterface session;
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="/byPath", method = RequestMethod.GET)
     public ModelAndView ByPathForm() {
         return new ModelAndView("path", "command", new ByPathForm());
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @RequestMapping(value="/byPath", method = RequestMethod.POST)
     public ModelAndView execute(@ModelAttribute("SpringWeb")ByPathForm pathModel, ModelMap model){
 
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
