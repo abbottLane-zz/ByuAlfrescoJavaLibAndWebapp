@@ -1,0 +1,28 @@
+// CMIS CRUD outline
+
+CLASSES: 
+	Navigation
+	Connection
+	CRUD
+
+	Connection:
+		- getFirstRepositorySession();
+		- getRepositoryByID(String repositoryID);
+	
+
+	Navigation:
+		- enterAFolder(String FolderName);
+		- listFoldersInDirectory();
+		- navigateUpLevel();
+	
+	CRUD:
+		- createFolder(String FolderName);
+		- deleteFolder(String FolderName);
+		- moveFolder(String currentFolderDir, String intendedFolderDir);
+		-
+		- createDocument(String docName);
+		- deleteDocument(String fileName);
+		- moveDocument(String currentFileDir, String intendedFileDir);
+		-
+		- replaceDocument(String newDoc, String toReplace)
+

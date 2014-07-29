@@ -1,0 +1,3 @@
+Command to transfer API HTML docs to my public folder on the CS computers:
+
+scp -r /home/wlane/Documents/ApiHTMLdoc wal090@salmonella.cs.byu.edu:/users/ugrad/w/wal090/public_html/api

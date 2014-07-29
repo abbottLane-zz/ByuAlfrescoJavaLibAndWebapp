@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+<!-- Alfresco Beans -->
+    <bean id="prod" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="prod"/>
+    </bean>
+    <bean id="prd" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="prd"/>
+    </bean>
+    <bean id="stage" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="stage"/>
+    </bean>
+    <bean id="stg" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="stg"/>
+    </bean>
+    <bean id="test" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="test"/>
+    </bean>
+    <bean id="dev" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="dev"/>
+    </bean>
+    <bean id="buggs1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="buggs1"/>
+    </bean>
+    <bean id="pinky11" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="pinky11"/>
+    </bean>
+    <bean id="wakko1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko1"/>
+    </bean>
+    <bean id="wakko2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko2"/>
+    </bean>
+    <bean id="brainiac11" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko2"/>
+    </bean>
+    <bean id="inigo1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko2"/>
+    </bean>
+    <bean id="inigo2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko2"/>
+    </bean>
+    <bean id="fish1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="wakko2"/>
+    </bean>
+    <bean id="yakko2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="yakko2"/>
+    </bean>
+    <bean id="brainiac-old" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="brainiac-old"/>
+    </bean>
+
+<!-- Sharepont Beans -->
+    <bean id="sptest" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="sharepointBoxName"/>
+    </bean>
+</beans>
