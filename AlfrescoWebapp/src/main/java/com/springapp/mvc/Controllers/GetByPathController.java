@@ -21,7 +21,7 @@ public class GetByPathController {
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView ByPathForm() {
-        return new ModelAndView("index", "command", new ByPathForm());
+        return new ModelAndView("path", "command", new ByPathForm());
     }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
@@ -65,7 +65,7 @@ public class GetByPathController {
         model.addAttribute("fullUrl", fullUrl);
 
         //Return the model and view
-        return new ModelAndView("index", "command", new ByPathForm());
+        return new ModelAndView("path", "command", new ByPathForm());
     }
 }
 
