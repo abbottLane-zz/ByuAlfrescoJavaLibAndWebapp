@@ -11,15 +11,16 @@
 </head>
 <body>
     <div class="container">
-        <h1>Users</h1>
-        <form:form method="post" action="login" commandName="user" role="form">
+        <h1>Alfresco Webapp Login</h1>
+        <!-- Mehtod == method, action == action, commandName == the method in the controller we want to call -->
+        <form:form method="post" action="login" commandName="login" role="form">
         <div class="form-group">
-            <form:label path="user">First Name:</form:label>
+            <form:label path="user">Username:</form:label>
             <form:input path="user" class="form-control" placeholder="User"/>
         </div>
         <div class="form-group">
-            <form:label path="password">Last Name:</form:label>
-            <form:input path="password" class="form-control" placeholder="Password"/>
+            <form:label path="password">Password:</form:label>
+            <form:input path="password" type= "password" class="form-control" placeholder="Password"/>
         </div>
         <button type="submit" class="btn btn-default">Login</button>
         </form:form>

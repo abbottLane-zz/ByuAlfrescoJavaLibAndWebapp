@@ -2,8 +2,8 @@ package com.springapp.mvc.models;
 
 
 public class LoginModel {
-    String user;
-    String password;
+    private String user;
+    private String password;
 
     public String getPassword() {
         return password;
