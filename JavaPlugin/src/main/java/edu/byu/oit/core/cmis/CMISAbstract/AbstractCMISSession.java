@@ -54,14 +54,12 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
     public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description ){
         if (contentType == null) contentType = "cmis:document";
 
-
         //uploading a folder consists of
-        // 1)creating a document (ie content stream),
+        // 1) creating a document (ie content stream),
         // 2) scanning for metadata and setting the properties,
         // 3) using folderName.createDocument() to create the document in the repo
 
-
-        // 1)CREATE DOCUMENT InputStream and ContentStream
+        // 1) CREATE DOCUMENT InputStream and ContentStream
         Path path = FileSystems.getDefault().getPath(filePath);
         byte[] buf = {};
         String mimetype = "";
@@ -74,8 +72,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         ByteArrayInputStream input = new ByteArrayInputStream(buf);
         ContentStream contentStream = session.getObjectFactory().createContentStream(fileName, buf.length, mimetype, input);
 
-
-        // 2)TRY Scanning metadata and setting properties
+        // 2) TRY Scanning metadata and setting properties
         Document doc = null;
         try{
             Metadata metadata = new Metadata();
