@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,8 +58,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD image
         IObjectID rootFolderId = session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("owen.jpg", "./additionalResources/testImages/Owen.jpg");
-        session.uploadDocument(rootFolderId.toString(),"owenPic.jpg",cs,null,"1.0","this is a picture of owen");
+        //ContentStream cs = session.createDocument("owen.jpg", "./additionalResources/testImages/Owen.jpg");
+        session.uploadDocument(rootFolderId.toString(),"owenPic.jpg","./additionalResources/testImages/Owen.jpg",null,"1.0","this is a picture of owen");
 
         //VERIFY that the upload completed successfully
         IObjectID imgId = session.getObjectIdByPath("/User Homes/abbott/test/owenPic.jpg");
@@ -116,8 +117,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD the document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage.jpg", "./additionalResources/testImages/testImage1.jpg", null, "1.0","Just another test image");
 
         //GET the document
         Document doc = session.getDocumentByPath("/User Homes/abbott/test/testImage.jpg");
@@ -138,8 +139,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD a document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", "./additionalResources/testImages/testImage1.jpg", null, "1.0","Just another test image");
 
         //GET the thumbnail
         String thumbUrl = session.getAlfrescoThumbnailUrl(uploadedDoc);
@@ -157,8 +158,8 @@ public class AlfrescoSessionTests {
     public void testGetAlfrescoDocumentUrl() throws Exception{
         //UPLOAD a document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", "./additionalResources/testImages/testImage1.jpg", null, "1.0","Just another test image");
 
         //GET the thumbnail
         String thumbUrl = session.getAlfrescoDocumentUrl(uploadedDoc);
@@ -178,8 +179,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD a document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "testImage2.jpg", "./additionalResources/testImages/testImage1.jpg", null, "1.0","Just another test image");
 
         //GET document metadata(all)
         String allMetadata = session.getDocumentMetadataAll(uploadedDoc);
@@ -219,8 +220,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD a document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg", "./additionalResources/testImages/Owen.jpg", null, "1.0","Just another test image");
 
         //GET metadata properties
         Document doc = session.getDocumentByPath("/User Homes/abbott/test/Owen.jpg");
@@ -255,8 +256,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD Document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
-        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
+        Document uploadedDoc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg","./additionalResources/testImages/Owen.jpg" , null, "1.0","Just another test image");
 
         //GET version history
         IObjectID objectId = session.getObjectIdByPath("/User Homes/abbott/test/Owen.jpg");
@@ -299,8 +300,8 @@ public class AlfrescoSessionTests {
 
         //UPLOAD document
         IObjectID rootFolderID= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
-        Document doc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg", cs, null, "1.0","Just another test image");
+        //ContentStream cs = session.createDocument("image1.jpg", "./additionalResources/testImages/Owen.jpg");
+        Document doc = session.uploadDocument(rootFolderID.toString(), "Owen.jpg", "./additionalResources/testImages/Owen.jpg", null, "1.0","Just another test image");
 
         //UPDATE metadata
         //Print a list of editable properties, for reference
@@ -349,11 +350,12 @@ public class AlfrescoSessionTests {
         //UPLOAD a Document
         IObjectID oid = session.getObjectIdByPath("/User Homes/abbott/test/");
         Folder folder = session.getFolder(oid.getLongID());
-        ContentStream contentStream = session.createDocument("newTestImage.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document doc = session.uploadDocument(folder.getId(), "newImageTest.jpg", contentStream, "cmis:document", "1", "a new image");
+        //ContentStream contentStream = session.createDocument("newTestImage.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document doc = session.uploadDocument(folder.getId(), "newImageTest.jpg",  "./additionalResources/testImages/testImage1.jpg", "cmis:document", "1", "a new image");
 
         //UPDATE document content
-        ContentStream contentStream2 = session.createDocument("newContent.jpg", "./additionalResources/testImages/Owen.jpg");
+        ContentStream contentStream2 = session.createDocumentContentStream("newContent.jpg", "./additionalResources/testImages/Owen.jpg");
+
         Document retrievedDoc = session.getDocument(doc.getId());
         IObjectID objectId = session.updateDocumentContent(contentStream2, retrievedDoc);
 
@@ -434,8 +436,8 @@ public class AlfrescoSessionTests {
         //UPLOAD a file
         IObjectID oid = session.getObjectIdByPath("/User Homes/abbott/test/");
         Folder folder = session.getFolder(oid.getLongID());
-        ContentStream contentStream = session.createDocument("newTestImage.jpg", "./additionalResources/testImages/testImage1.jpg");
-        Document doc = session.uploadDocument(folder.getId(), "newImageTest.jpg", contentStream, "cmis:document", "1", "a new image");
+        //ContentStream contentStream = session.createDocumentContentStream("newTestImage.jpg", "./additionalResources/testImages/testImage1.jpg");
+        Document doc = session.uploadDocument(folder.getId(), "newImageTest.jpg","./additionalResources/testImages/testImage1.jpg", "cmis:document", "1", "a new image");
 
 
         ///DOWNLOAD the file from the repo by path
@@ -464,7 +466,7 @@ public class AlfrescoSessionTests {
     public void testCreateDocument() throws Exception {
 
 
-        ContentStream cs =session.createDocument("newFile.txt", "./additionalResources/testFolder/notes.txt" );
+        ContentStream cs =session.createDocumentContentStream("newFile.txt", "./additionalResources/testFolder/notes.txt" );
 
         assertEquals("text/plain", cs.getMimeType());
         assertEquals("newFile.txt", cs.getFileName());

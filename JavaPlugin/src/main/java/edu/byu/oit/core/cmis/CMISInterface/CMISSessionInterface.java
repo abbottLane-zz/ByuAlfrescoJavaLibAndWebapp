@@ -34,13 +34,13 @@ public interface CMISSessionInterface {
      * @post A valid, non-null Cmis Document object
      * @param folderId The objectID of the folder into which you wish to upload your document.
      * @param fileName The name that the uploaded document will assume on the server.
-     * @param contentStream The contentStream containing the documents actual content.
+     * @param filePath The path to the file you wish to upload.
      * @param contentType The content type associated with the document, IE "cmis:document". If null, "cmis:document" is supplied as a default.
      * @param version The document version associated with the uploaded document.
      * @param description The description metadata you may wish to post attached to the document. null or "" are appropriate arguments, if that's what you want.
      * @return Returns a Document object representing the file you just uploaded to the server.
      */
-    public Document uploadDocument(String folderId, String fileName, ContentStream contentStream, String contentType, String version, String description);
+    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description);
 
     /**
      * Creates an empty folder in the repository, given the path in the repo, and a name.
@@ -300,8 +300,17 @@ public interface CMISSessionInterface {
      * @pre <code>String newName != null && String filePath != null && filePath points to a valid document</code>
      * @post A valid, non-null <code>ContentStream</code> containing the content at <code>filePath</code>
      */
-    public ContentStream createDocument(String newName, String filePath);
+    public java.io.InputStream createDocumentInputStream(String newName, String filePath);
 
+    /**
+     * Creates the ContentStream of a new Document. ContentStreams can be used to upload content to a repository using the uploadDocument() method.
+     * @param newName The name of the new Document.
+     * @param filePath The local path to the file content.
+     * @return Returns a ContentStream containing the new Document's name and content.
+     * @pre <code>String newName != null && String filePath != null && filePath points to a valid document</code>
+     * @post A valid, non-null <code>ContentStream</code> containing the content at <code>filePath</code>
+     */
+    public ContentStream createDocumentContentStream(String newName, String filePath);
     /**
      *
      * @param doc

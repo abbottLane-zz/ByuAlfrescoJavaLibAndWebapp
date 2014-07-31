@@ -32,19 +32,19 @@ public class MoreObjectIDTest {
         //upload all test files to server prior to test
         //Owen.jpg
         IObjectID folderId= session.getObjectIdByPath("/User Homes/abbott/test/");
-        ContentStream cs = session.createDocument("Owen.jpg", "./additionalResources/mainFolderItems/Owen.jpg");
-        Document uploadedDoc = session.uploadDocument(folderId.toString(), "Owen.jpg", cs, null, "1", "This is a picture of Owen, 5 months old");
+        //ContentStream cs = session.createDocument("Owen.jpg", "./additionalResources/mainFolderItems/Owen.jpg");
+        Document uploadedDoc = session.uploadDocument(folderId.toString(), "Owen.jpg","./additionalResources/mainFolderItems/Owen.jpg" , null, "1", "This is a picture of Owen, 5 months old");
 
         //rename folder
         session.uploadFolder(folderId.toString(), "rename", "./additionalResources/mainFolderItems/rename/");
 
         //pythondoc
-        ContentStream cspyth = session.createDocument("BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx");
-        Document uploadpythdoc = session.uploadDocument(folderId.toString(), "BeginningPythonForNathan.docx", cspyth, null, "1", null );
+        //ContentStream cspyth = session.createDocument("BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx");
+        Document uploadpythdoc = session.uploadDocument(folderId.toString(), "BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx", null, "1", null );
 
         //newImage.jpg
-        ContentStream csNewImage = session.createDocument("newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg");
-        Document uploadnewimage = session.uploadDocument(folderId.toString(), "newImage3.jpg", csNewImage, null, "1", "Description: its a photo");
+        //ContentStream csNewImage = session.createDocument("newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg");
+        Document uploadnewimage = session.uploadDocument(folderId.toString(), "newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg", null, "1", "Description: its a photo");
 
         iod = session.getObjectIdByPath("/User Homes/abbott/test/Owen.jpg");
         id = (ObjectID)session.getObjectIdByPath("/User Homes/abbott/test/Owen.jpg");

@@ -22,6 +22,7 @@
           <element id="archive" name="JavaPlugin-1.0-SNAPSHOT.jar">
             <element id="module-output" name="JavaPlugin" />
           </element>
+          <element id="library" level="project" name="Maven: org.apache.tika:tika-core:1.5" />
           <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-commons-api:0.10.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
           <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-client-api:0.10.0" />

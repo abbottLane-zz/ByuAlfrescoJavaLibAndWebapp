@@ -36,8 +36,8 @@ public class uploadController {
         IObjectID folderId = session.getObjectIdByPath("/User Homes/abbott/");
         String fileName = extractFilename(uploadModel.getUploadPath());
 
-        ContentStream cs = session.createDocument(fileName,uploadModel.getUploadPath());
-        Document doc = session.uploadDocument(folderId.toString(),fileName,cs,null, "1.0", uploadModel.getDescription()); //"cmis:document" was where null is
+        //ContentStream cs = session.createDocument(fileName,uploadModel.getUploadPath());
+        Document doc = session.uploadDocument(folderId.toString(),fileName,uploadModel.getUploadPath(),null, "1.0", uploadModel.getDescription()); //"cmis:document" was where null is
 
         //FORM thumb/doc urls based on docMimeType:
         String thumbUrl;

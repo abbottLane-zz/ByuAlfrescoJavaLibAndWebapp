@@ -4,6 +4,7 @@ import edu.byu.oit.core.cmis.CMISInterface.CMISSessionInterface;
 import edu.byu.oit.core.cmis.CMISInterface.IObjectID;
 import edu.byu.oit.core.cmis.CmisUtilClasses.ObjectID;
 import edu.byu.oit.core.cmis.CmisUtilClasses.ObjectPathModel;
+import edu.byu.oit.core.cmis.CmisUtilClasses.TikaParser;
 import org.apache.chemistry.opencmis.client.api.*;
 import org.apache.chemistry.opencmis.commons.PropertyIds;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
@@ -11,11 +12,15 @@ import org.apache.chemistry.opencmis.commons.definitions.PropertyDefinition;
 import org.apache.chemistry.opencmis.commons.enums.PropertyType;
 import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.enums.VersioningState;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -45,23 +50,78 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
     //create         |
     //----------------
     @Override
-    public Document uploadDocument(String folderId, String fileName, ContentStream contentStream, String contentType, String version, String description ){
+    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description ){
         if (contentType == null) contentType = "cmis:document";
 
-        //Append aspect to the content type so we can set description
-        StringBuilder sb = new StringBuilder(contentType);
-        sb.append(",P:cm:titled");
-        contentType = sb.toString();
 
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put(PropertyIds.OBJECT_TYPE_ID, contentType);
-        properties.put(PropertyIds.NAME, fileName);
-        properties.put("cm:description", description);
+        //uploading a folder consists of
+        // 1)creating a document (ie content stream),
+        // 2) scanning for metadata and setting the properties,
+        // 3) using folderName.createDocument() to create the document in the repo
 
-        Folder folder = getFolder(folderId);
-        VersioningState v = VersioningState.MINOR;
-        if (version != null && version.toLowerCase().equals("major")) v = VersioningState.MAJOR;
-        Document doc =folder.createDocument(properties, contentStream, v);
+
+        // 1)CREATE DOCUMENT InputStream and ContentStream
+        Path path = FileSystems.getDefault().getPath(filePath);
+        byte[] buf = {};
+        String mimetype = "";
+        try {
+            buf = Files.readAllBytes(path);
+            mimetype = Files.probeContentType(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayInputStream input = new ByteArrayInputStream(buf);
+        ContentStream contentStream = session.getObjectFactory().createContentStream(fileName, buf.length, mimetype, input);
+
+        ////////////////////////////////////////////////////////////////
+        //TRY setting metadata context  parser etc////////////////////
+        Document doc = null;
+        try{
+            Metadata metadata = new Metadata();
+            DefaultHandler handler = new DefaultHandler();
+            Parser parser = new TikaParser();
+            ParseContext context = new ParseContext();
+
+            metadata.set(Metadata.CONTENT_TYPE, mimetype);
+
+            parser.parse(input,handler, metadata, context);
+            String lat = metadata.get("geo:lat");
+            String lon = metadata.get("geo:long");
+
+            //Append aspect to the content type so we can set description
+            StringBuilder sb = new StringBuilder(contentType);
+            sb.append(",P:cm:titled");
+            contentType = sb.toString();
+
+            Map<String, Object> properties = new HashMap<String, Object>();
+            if (lat != null && lon != null) {
+                System.out.println("LAT:" + lat);
+                System.out.println("LON:" + lon);
+                properties.put("cmisbook:gpsLatitude", BigDecimal.valueOf(Float.parseFloat(lat)));
+                properties.put("cmisbook:gpsLongitude", BigDecimal.valueOf(Float.parseFloat(lon)));
+            }
+            properties.put(PropertyIds.OBJECT_TYPE_ID, contentType);
+            properties.put(PropertyIds.NAME, fileName);
+            properties.put("cm:description", description);
+
+            Folder folder = getFolder(folderId);
+            VersioningState v = VersioningState.MINOR;
+            if (version != null && version.toLowerCase().equals("major")) v = VersioningState.MAJOR;
+            doc =folder.createDocument(properties, contentStream, v);
+
+        }
+        catch(TikaException te){
+            System.out.println("Caught Tika Exception, Skipping...");
+        }
+        catch(SAXException se) {
+            System.out.println("Caught SAXException, Skipping...");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
+
+
 
         return doc;
     }
@@ -92,8 +152,8 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         ArrayList<ObjectPathModel> pathsToFiles = getFolderContentsForFolderUpload(folderPath);
         for(ObjectPathModel entry : pathsToFiles){
             if(entry.getObjectType().equals("file")) {
-                ContentStream cs = createDocument(entry.getObjectName(), entry.getObjectPath().toString());
-                uploadDocument(newFolder.getId(), entry.getObjectName(), cs, "cmis:document", "1", "");
+                //ContentStream cs = createDocument(entry.getObjectName(), entry.getObjectPath().toString());
+                uploadDocument(newFolder.getId(), entry.getObjectName(), entry.getObjectPath().toString(), "cmis:document", "1", "");
             }
             else if(entry.getObjectType().equals("folder")){
                 // recursively call 'upload folder' to take care of sub-folders and their items
@@ -364,6 +424,8 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         String objectType = extractObjectType(queryString);
 
+        System.out.println("EXECUTE QUERY: QUERY EXECUTED THERE WAS BLOOD EVERYWHERE");
+
         // get the query name of cmis:objectId
         ObjectType type = session.getTypeDefinition(objectType);
         PropertyDefinition<?> objectIdPropDef = type.getPropertyDefinitions().get(PropertyIds.OBJECT_ID);
@@ -490,7 +552,23 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         return filePaths;
     }
     @Override
-    public ContentStream createDocument(String newName, String filePath) {
+    public InputStream createDocumentInputStream(String newName, String filePath) {
+        Path path = FileSystems.getDefault().getPath(filePath);
+        byte[] buf = {};
+        String mimetype = "";
+
+        try {
+            buf = Files.readAllBytes(path);
+            mimetype = Files.probeContentType(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ByteArrayInputStream input = new ByteArrayInputStream(buf);
+
+        return input;
+    }
+    public ContentStream createDocumentContentStream(String newName, String filePath) {
         Path path = FileSystems.getDefault().getPath(filePath);
         byte[] buf = {};
         String mimetype = "";
