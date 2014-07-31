@@ -65,7 +65,7 @@ public class GetByPathController {
         model.addAttribute("fullUrl", fullUrl);
 
         //Return the model and view
-        return new ModelAndView("path", "command", new ByPathForm());
+        return new ModelAndView("path", "command", pathModel);
     }
 }
 

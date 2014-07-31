@@ -394,7 +394,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             while ((read = stream.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            System.out.println("Finished downloading");
+            //System.out.println("Finished downloading");
         } catch (IOException e) {
             e.printStackTrace();
             return false;
