@@ -293,7 +293,7 @@ public interface CMISSessionInterface {
     public IObjectID getObjectIdByPath(String path);
 
     /**
-     * Creates the ContentStream of a new Document. ContentStreams can be used to upload content to a repository using the uploadDocument() method.
+     * Creates the InputStream of a new Document. InputStreams can be used to leverage the Apache Tika plugin to scrape additional metadata off the documents we wish to upload .
      * @param newName The name of the new Document.
      * @param filePath The local path to the file content.
      * @return Returns a ContentStream containing the new Document's name and content.

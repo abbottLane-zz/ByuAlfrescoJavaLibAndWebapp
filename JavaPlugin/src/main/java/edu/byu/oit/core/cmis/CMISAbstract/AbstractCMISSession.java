@@ -14,6 +14,7 @@ import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.metadata.XMPDM;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
 import org.xml.sax.SAXException;
@@ -73,8 +74,8 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         ByteArrayInputStream input = new ByteArrayInputStream(buf);
         ContentStream contentStream = session.getObjectFactory().createContentStream(fileName, buf.length, mimetype, input);
 
-        ////////////////////////////////////////////////////////////////
-        //TRY setting metadata context  parser etc////////////////////
+
+        // 2)TRY Scanning metadata and setting properties
         Document doc = null;
         try{
             Metadata metadata = new Metadata();
@@ -85,7 +86,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             metadata.set(Metadata.CONTENT_TYPE, mimetype);
 
             parser.parse(input,handler, metadata, context);
-            String lat = metadata.get("geo:lat");
+            String lat = metadata.get(XMPDM.ARTIST);
             String lon = metadata.get("geo:long");
 
             //Append aspect to the content type so we can set description
@@ -104,11 +105,11 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             properties.put(PropertyIds.NAME, fileName);
             properties.put("cm:description", description);
 
+            //3) CREATE the doument in the repo
             Folder folder = getFolder(folderId);
             VersioningState v = VersioningState.MINOR;
             if (version != null && version.toLowerCase().equals("major")) v = VersioningState.MAJOR;
             doc =folder.createDocument(properties, contentStream, v);
-
         }
         catch(TikaException te){
             System.out.println("Caught Tika Exception, Skipping...");
@@ -118,11 +119,6 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////
-
-
-
         return doc;
     }
 
@@ -424,7 +420,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         String objectType = extractObjectType(queryString);
 
-        System.out.println("EXECUTE QUERY: QUERY EXECUTED THERE WAS BLOOD EVERYWHERE");
+//        System.out.println("EXECUTE QUERY: QUERY EXECUTED THERE WAS BLOOD EVERYWHERE");
 
         // get the query name of cmis:objectId
         ObjectType type = session.getTypeDefinition(objectType);
