@@ -24,7 +24,15 @@
         </div>
         <button type="submit" class="btn btn-default">Login</button>
         </form:form>
+
+        <div class="errorMessage">
+
+            <c:if test="${loginError == true}">
+                <p>Invalid user credentials</p>
+            </c:if>
+        </div>
     </div>
+
 
 </body>
 </html>
