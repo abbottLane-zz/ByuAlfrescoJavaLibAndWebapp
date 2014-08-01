@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.NoSuchFileException;
+
 @Controller
 public class uploadController {
     private CMISSessionInterface session;
@@ -36,9 +38,15 @@ public class uploadController {
         IObjectID folderId = session.getObjectIdByPath("/User Homes/abbott/");
         String fileName = extractFilename(uploadModel.getUploadPath());
 
-        //ContentStream cs = session.createDocument(fileName,uploadModel.getUploadPath());
-        Document doc = session.uploadDocument(folderId.toString(),fileName,uploadModel.getUploadPath(),null, "1.0", uploadModel.getDescription()); //"cmis:document" was where null is
-
+        Document doc;
+        try {
+            doc = session.uploadDocument(folderId.toString(), fileName, uploadModel.getUploadPath(), null, "1.0", uploadModel.getDescription()); //"cmis:document" was where null is
+        }
+        catch(java.io.IOException nsf){
+            //If an invalid file type is sent through notify the user
+            model.addAttribute("invalid", true);
+            return new ModelAndView("upload", "command", new uploadRequestModel());
+        }
         //FORM thumb/doc urls based on docMimeType:
         String thumbUrl;
         if(session.doesAlfrescoThumbnailExist(doc)) {

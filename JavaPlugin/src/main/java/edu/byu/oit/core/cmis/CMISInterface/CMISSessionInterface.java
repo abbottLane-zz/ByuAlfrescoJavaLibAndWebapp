@@ -3,6 +3,7 @@ package edu.byu.oit.core.cmis.CMISInterface;
 import org.apache.chemistry.opencmis.client.api.*;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public interface CMISSessionInterface {
      * @param description The description metadata you may wish to post attached to the document. null or "" are appropriate arguments, if that's what you want.
      * @return Returns a Document object representing the file you just uploaded to the server.
      */
-    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description);
+    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description) throws IOException;
 
     /**
      * Creates an empty folder in the repository, given the path in the repo, and a name.
@@ -64,7 +65,7 @@ public interface CMISSessionInterface {
      * <code>String folderName</code> must be a valid, non-null String object
      * @post A valid, non-null cmis Folder object which represents an existing folder on the repository
      */
-    public Folder uploadFolder(String folderId, String folderName, String folderPath);
+    public Folder uploadFolder(String folderId, String folderName, String folderPath) throws IOException;
 
     //----------------
     // Read          |

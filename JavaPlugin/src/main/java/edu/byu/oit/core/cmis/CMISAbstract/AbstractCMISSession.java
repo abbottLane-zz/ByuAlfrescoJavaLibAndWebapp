@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -51,7 +52,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
     //create         |
     //----------------
     @Override
-    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description ){
+    public Document uploadDocument(String folderId, String fileName, String filePath, String contentType, String version, String description ) throws IOException {
         if (contentType == null) contentType = "cmis:document";
 
         //uploading a folder consists of
@@ -63,12 +64,10 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         Path path = FileSystems.getDefault().getPath(filePath);
         byte[] buf = {};
         String mimetype = "";
-        try {
-            buf = Files.readAllBytes(path);
-            mimetype = Files.probeContentType(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        buf = Files.readAllBytes(path);
+        mimetype = Files.probeContentType(path);
+
         ByteArrayInputStream input = new ByteArrayInputStream(buf);
         ContentStream contentStream = session.getObjectFactory().createContentStream(fileName, buf.length, mimetype, input);
 
@@ -132,7 +131,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
     }
 
     @Override
-    public Folder uploadFolder(String folderId, String folderName,String folderPath){
+    public Folder uploadFolder(String folderId, String folderName,String folderPath) throws IOException {
 
         //create empty folder on server where name = 'folderName'
         Folder folder = getFolder(folderId);
@@ -146,7 +145,11 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         for(ObjectPathModel entry : pathsToFiles){
             if(entry.getObjectType().equals("file")) {
                 //ContentStream cs = createDocument(entry.getObjectName(), entry.getObjectPath().toString());
-                uploadDocument(newFolder.getId(), entry.getObjectName(), entry.getObjectPath().toString(), "cmis:document", "1", "");
+                //try {
+                    uploadDocument(newFolder.getId(), entry.getObjectName(), entry.getObjectPath().toString(), "cmis:document", "1", "");
+//                } catch (NoSuchFileException e) {
+//                    e.printStackTrace();
+//                }
             }
             else if(entry.getObjectType().equals("folder")){
                 // recursively call 'upload folder' to take care of sub-folders and their items

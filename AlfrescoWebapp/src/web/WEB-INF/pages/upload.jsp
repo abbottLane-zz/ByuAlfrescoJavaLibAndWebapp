@@ -33,11 +33,16 @@
 
 <!-- Result  -->
 <div id="results">
-    <c:if test="${docName!=null}">
-        <p>Upload succeeded!</p>
-        <p><b>Document uploaded:</b> ${docName}</p>
-        <p><a href=${fullUrl}> View Document </a></p>
-    </c:if>
+    <c:choose>
+        <c:when test="${docName!=null}">
+            <p>Upload succeeded!</p>
+            <p><b>Document uploaded:</b> ${docName}</p>
+            <p><a href=${fullUrl}> View Document </a></p>
+        </c:when>
+        <c:when test="${invalid == true}">
+            <div class="errorMessage"><p>Invalid file, please check to make sure your file path is correct, and local to your machine.</p></div>
+        </c:when>
+    </c:choose>
 
 
 </div>

@@ -29,8 +29,6 @@ public class selectListController {
     @RequestMapping(value="/selectFromList", method = RequestMethod.GET)
     public ModelAndView loadPage(@ModelAttribute("SpringWeb")SelectListModel selectModel, ModelMap model){
 
-        System.out.println("This just happened");
-
         //ESTABLISH the connection
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         session = (CMISSessionInterface)context.getBean("test");

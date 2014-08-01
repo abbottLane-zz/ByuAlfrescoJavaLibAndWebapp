@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 public class MoreObjectIDTest {
@@ -33,18 +35,34 @@ public class MoreObjectIDTest {
         //Owen.jpg
         IObjectID folderId= session.getObjectIdByPath("/User Homes/abbott/test/");
         //ContentStream cs = session.createDocument("Owen.jpg", "./additionalResources/mainFolderItems/Owen.jpg");
-        Document uploadedDoc = session.uploadDocument(folderId.toString(), "Owen.jpg","./additionalResources/mainFolderItems/Owen.jpg" , null, "1", "This is a picture of Owen, 5 months old");
+        try {
+            Document uploadedDoc = session.uploadDocument(folderId.toString(), "Owen.jpg","./additionalResources/mainFolderItems/Owen.jpg" , null, "1", "This is a picture of Owen, 5 months old");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //rename folder
-        session.uploadFolder(folderId.toString(), "rename", "./additionalResources/mainFolderItems/rename/");
+        try {
+            session.uploadFolder(folderId.toString(), "rename", "./additionalResources/mainFolderItems/rename/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //pythondoc
         //ContentStream cspyth = session.createDocument("BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx");
-        Document uploadpythdoc = session.uploadDocument(folderId.toString(), "BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx", null, "1", null );
+        try {
+            Document uploadpythdoc = session.uploadDocument(folderId.toString(), "BeginningPythonForNathan.docx", "./additionalResources/mainFolderItems/BeginningPythonForNathan.docx", null, "1", null );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //newImage.jpg
         //ContentStream csNewImage = session.createDocument("newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg");
-        Document uploadnewimage = session.uploadDocument(folderId.toString(), "newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg", null, "1", "Description: its a photo");
+        try {
+            Document uploadnewimage = session.uploadDocument(folderId.toString(), "newImage3.jpg", "./additionalResources/mainFolderItems/newImage3.jpg", null, "1", "Description: its a photo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         iod = session.getObjectIdByPath("/User Homes/abbott/test/Owen.jpg");
         id = (ObjectID)session.getObjectIdByPath("/User Homes/abbott/test/Owen.jpg");
