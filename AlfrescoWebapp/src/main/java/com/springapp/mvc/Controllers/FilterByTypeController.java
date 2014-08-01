@@ -42,28 +42,32 @@ public class FilterByTypeController {
         IObjectID folderId = session.getObjectIdByPath("/User Homes/abbott/");
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT * FROM cmis:document WHERE IN_TREE('"+folderId.toString()+"') AND cmis:contentStreamMimeType LIKE '");
+        query.append("SELECT * FROM cmis:document WHERE IN_TREE('"+folderId.toString()+"') AND cmis:contentStreamMimeType ");
 
         String fileName;
         if(queryModel.getFiletype().equals("image")){
-            fileName="%image%";
+            fileName="LIKE '%image%'";
             query.append(fileName);
         }
         else if(queryModel.getFiletype().equals("txt")){
-            fileName="%text%";
+            fileName="LIKE '%text%'";
             query.append(fileName);
         }
         else if(queryModel.getFiletype().equals("mp3")){
-            fileName="%audio%";
+            fileName="LIKE '%audio%'";
             query.append(fileName);
         }
         else if(queryModel.getFiletype().equals("mp4")){
-            fileName="%video%";
+            fileName="LIKE '%video%'";
             query.append(fileName);
         }
-        query.append("'");
+        else if(queryModel.getFiletype().equals("other")){
+            fileName="LIKE '%application%'";
+            query.append(fileName);
+        }
+        //query.append("'");
 
-        //System.out.println("The Query: " + query.toString());
+        System.out.println("The Query: " + query.toString());
 
         //EXECUTE the query
         ItemIterable<QueryResult> results = session.executeQuery(query.toString());

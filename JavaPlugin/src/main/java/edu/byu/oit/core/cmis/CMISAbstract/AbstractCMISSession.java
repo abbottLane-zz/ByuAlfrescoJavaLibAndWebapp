@@ -219,7 +219,7 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         String mimeType = mimeTypeDivides[0];
 
         //System.out.println("Does thumbnail exist for " + mimeType + "?");
-        if(mimeType.equals("image") || mimeType.equals("img")){
+        if(mimeType.equals("image") || mimeType.equals("img") || mimeType.equals("pdf")){
             return true;
         }
         else{
