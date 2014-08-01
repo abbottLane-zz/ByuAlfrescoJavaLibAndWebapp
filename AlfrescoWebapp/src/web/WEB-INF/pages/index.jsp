@@ -26,7 +26,6 @@
         </form:form>
 
         <div class="errorMessage">
-
             <c:if test="${loginError == true}">
                 <p>Invalid user credentials</p>
             </c:if>

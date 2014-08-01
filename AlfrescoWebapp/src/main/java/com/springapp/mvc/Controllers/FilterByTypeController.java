@@ -65,9 +65,8 @@ public class FilterByTypeController {
             fileName="LIKE '%application%'";
             query.append(fileName);
         }
-        //query.append("'");
 
-        System.out.println("The Query: " + query.toString());
+        //System.out.println("The Query: " + query.toString());
 
         //EXECUTE the query
         ItemIterable<QueryResult> results = session.executeQuery(query.toString());

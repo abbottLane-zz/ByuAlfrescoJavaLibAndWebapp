@@ -3,6 +3,7 @@
     /* Makes a horizontal row */
     right: 200px;
 }
+
 .tabs a {
     /* Make them block level
        and only as wide as they need */

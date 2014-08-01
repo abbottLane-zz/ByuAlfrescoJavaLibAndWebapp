@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="https://www.byu.edu/templates/2.1.5/images/favicon.ico">
 </head>
 <body>
+
 <ul id="nav" class="tabs" data-tab>
     <li class="tab-title"><a href="<c:url value="/byPath"/>"><b>Get by Path</b></a></li>
     <li class="tab-title active"><a href="<c:url value="/filterByType"/>"><b>Filter by file type</b></a></li>
@@ -16,20 +17,24 @@
     <li class="tab-title"><a href="<c:url value="/videoDemo"/>"><b>Video</b></a></li>
 </ul>
 
+
 <!-- form -->
 <div id="form">
 <p>You can retrieve one or several alfresco documents at a time by executing queries. Choose a
     filetype to retrieve filtered query results:</p>
+
+
 <form:form method="POST" action="/filterByType">
     <form:radiobutton path="filetype" value="image"/>Images
     <form:radiobutton path="filetype" value="txt"/>Text
     <form:radiobutton path="filetype" value="mp3"/>Audio
     <form:radiobutton path="filetype" value="mp4"/>Video
     <form:radiobutton path="filetype" value="other"/>Other(pdf, docx, etc)<br>
-    <td colspan="2">
-        <input type="submit" value="Submit">
-    </td>
+    <input type="submit" value="Submit">
+
 </form:form>
+        ...
+
 </div>
 
 <!-- results -->

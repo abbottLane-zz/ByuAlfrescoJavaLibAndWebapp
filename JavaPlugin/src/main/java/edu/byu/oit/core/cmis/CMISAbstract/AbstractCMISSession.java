@@ -14,6 +14,8 @@ import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.metadata.Office;
+import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.metadata.XMPDM;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
@@ -82,8 +84,8 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             metadata.set(Metadata.CONTENT_TYPE, mimetype);
 
             parser.parse(input,handler, metadata, context);
-            String lat = metadata.get(XMPDM.ARTIST);
-            String lon = metadata.get("geo:long");
+            String author = metadata.get(Office.AUTHOR);
+            String title = metadata.get(TikaCoreProperties.TITLE);
 
             //Append aspect to the content type so we can set description
             StringBuilder sb = new StringBuilder(contentType);
@@ -91,11 +93,11 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             contentType = sb.toString();
 
             Map<String, Object> properties = new HashMap<String, Object>();
-            if (lat != null && lon != null) {
-                System.out.println("LAT:" + lat);
-                System.out.println("LON:" + lon);
-                properties.put("cmisbook:gpsLatitude", BigDecimal.valueOf(Float.parseFloat(lat)));
-                properties.put("cmisbook:gpsLongitude", BigDecimal.valueOf(Float.parseFloat(lon)));
+            if (author != null || title != null) {
+                System.out.println("Author:" + author);
+                System.out.println("Title:" + title);
+                properties.put("cmis:author", author);
+                properties.put("cmis:title", title);
             }
             properties.put(PropertyIds.OBJECT_TYPE_ID, contentType);
             properties.put(PropertyIds.NAME, fileName);

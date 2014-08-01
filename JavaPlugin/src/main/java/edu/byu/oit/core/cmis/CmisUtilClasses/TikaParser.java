@@ -18,7 +18,7 @@ public class TikaParser extends AbstractParser {
 
     ////////////////////////////////////////////////////////////////////////////
     ///put these outside of the parser to make the object parser more dynamic
-    private static final Set<MediaType> SUPPORTED_TYPES = Collections.singleton(MediaType.application("jpeg"));
+    //private static final Set<MediaType> SUPPORTED_TYPES = Collections.singleton(MediaType.application("jpeg"));
     public static final String MIME_TYPE = "image/jpeg";
     ////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@ public class TikaParser extends AbstractParser {
     @Override
     public void parse(InputStream inputStream, ContentHandler contentHandler, Metadata metadata, ParseContext parseContext) throws IOException, SAXException, TikaException {
         metadata.set(Metadata.CONTENT_TYPE, MIME_TYPE);
-        metadata.set("Hello", "World");
+        //metadata.set("Hello", "World");
 
         XHTMLContentHandler xhtml = new XHTMLContentHandler(contentHandler, metadata);
         xhtml.startDocument();
