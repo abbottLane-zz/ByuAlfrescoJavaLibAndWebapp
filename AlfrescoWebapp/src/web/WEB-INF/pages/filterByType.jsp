@@ -10,7 +10,7 @@
 <body>
 
 <ul id="nav" class="tabs" data-tab>
-    <li class="tab-title"><a href="<c:url value="/byPath"/>"><b>Get by Path</b></a></li>
+    <li class="tab-title"><a href="<c:url value="/byPath"/>"><b>Get by Name</b></a></li>
     <li class="tab-title active"><a href="<c:url value="/filterByType"/>"><b>Filter by file type</b></a></li>
     <li class="tab-title"><a href="<c:url value="/upload"/>"><b>Upload</b></a></li>
     <li class="tab-title"> <a href="<c:url value="/selectFromList"/>"><b>Select and Edit</b></a></li>

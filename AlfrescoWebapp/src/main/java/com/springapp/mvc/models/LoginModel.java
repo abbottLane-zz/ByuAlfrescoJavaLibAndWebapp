@@ -1,6 +1,5 @@
 package com.springapp.mvc.models;
 
-
 public class LoginModel {
     private String user;
     private String password;
