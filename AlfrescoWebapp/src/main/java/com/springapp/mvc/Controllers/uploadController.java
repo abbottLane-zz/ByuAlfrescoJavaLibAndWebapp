@@ -1,6 +1,7 @@
 package com.springapp.mvc.Controllers;
 
 import com.springapp.mvc.models.uploadRequestModel;
+import com.springapp.mvc.service.CmisSessionService;
 import edu.byu.oit.core.cmis.CMISInterface.CMISSessionInterface;
 import edu.byu.oit.core.cmis.CMISInterface.IObjectID;
 import org.apache.chemistry.opencmis.client.api.Document;
@@ -14,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.nio.file.NoSuchFileException;
 
 @Controller
 public class uploadController {
+
+    @Resource(lookup="cmis")
+    CmisSessionService sessionService;
     private CMISSessionInterface session;
 
     @RequestMapping(value="/upload", method = RequestMethod.GET)
@@ -29,13 +34,15 @@ public class uploadController {
     public ModelAndView execute(@ModelAttribute("SpringWeb")uploadRequestModel uploadModel, ModelMap model){
 
         //ESTABLISH the connection
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        session = (CMISSessionInterface)context.getBean("test");
-        session.setCredentials("admin", "Iamb0b123");
-        session.startSession();
+        session = sessionService.getSession();
 
         //UPLOAD the file
-        IObjectID folderId = session.getObjectIdByPath("/User Homes/abbott/");
+        String userHome;
+        if(sessionService.getUsername().equals("admin")){
+            userHome = "abbott";
+        }
+        else{userHome=sessionService.getUsername();}
+        IObjectID folderId = session.getObjectIdByPath("/User Homes/" + userHome+"/");
         String fileName = extractFilename(uploadModel.getUploadPath());
 
         Document doc;
