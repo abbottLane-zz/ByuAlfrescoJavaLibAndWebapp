@@ -1,6 +1,7 @@
 package com.springapp.mvc.Controllers;
 
 import com.springapp.mvc.models.QueryModel;
+import com.springapp.mvc.service.CmisSessionService;
 import edu.byu.oit.core.cmis.CMISInterface.CMISSessionInterface;
 import edu.byu.oit.core.cmis.CMISInterface.IObjectID;
 import org.apache.chemistry.opencmis.client.api.Document;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import java.util.List;
 @Controller
 public class FilterByTypeController {
 
+    @Resource(lookup="cmis")
+    CmisSessionService sessionService;
     CMISSessionInterface session;
 
     @RequestMapping(value="/filterByType", method = RequestMethod.GET)
@@ -33,13 +37,15 @@ public class FilterByTypeController {
     public ModelAndView execute(@ModelAttribute("SpringWeb")QueryModel queryModel, ModelMap model){
 
         //ESTABLISH a connection to the repo
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        session = (CMISSessionInterface)context.getBean("test");
-        session.setCredentials("admin", "Iamb0b123");
-        session.startSession();
+        session = sessionService.getSession();
 
         //FORM a query based on input from QueryModel, restricting query domain to the test folder
-        IObjectID folderId = session.getObjectIdByPath("/User Homes/abbott/");
+        String UserHome;
+        if(sessionService.getUsername().equals("admin")){
+            UserHome="abbott";
+        }
+        else{ UserHome=sessionService.getUsername();}
+        IObjectID folderId = session.getObjectIdByPath("/User Homes/"+UserHome +"/");
         StringBuilder query = new StringBuilder();
 
         query.append("SELECT * FROM cmis:document WHERE IN_TREE('"+folderId.toString()+"') AND cmis:contentStreamMimeType ");
@@ -65,8 +71,6 @@ public class FilterByTypeController {
             fileName="LIKE '%application%'";
             query.append(fileName);
         }
-
-        //System.out.println("The Query: " + query.toString());
 
         //EXECUTE the query
         ItemIterable<QueryResult> results = session.executeQuery(query.toString());
