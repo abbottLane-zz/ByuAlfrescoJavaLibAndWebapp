@@ -20,7 +20,7 @@
 
 <!-- form -->
 <div id="form">
-    <p>Please provide the path to a local file you wish to upload to the Alfresco server. <br> The folder '/User Homes/abbott/' has been hardcoded to store your file.</p>
+    <p>Please provide the path to a local file you wish to upload to the Alfresco server. <br> Your user root folder has been hardcoded to store your file.</p>
 <form:form method="POST" action="/upload">
     <form:label path="uploadPath">Path to File: </form:label>
     <form:input path="uploadPath"/><br>

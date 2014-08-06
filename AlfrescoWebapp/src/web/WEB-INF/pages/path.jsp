@@ -19,7 +19,7 @@
 
 <!-- form -->
 <div id="form">
-    <p>Retrieve an Alfresco Document by typing the path to the document in the following form: </p>
+    <p>Retrieve an Alfresco Document by typing the name of the document in the following form: </p>
     <form:form method="POST" action="/byPath">
         <form:label path="path">Path: </form:label>
         <form:input path="path"/><br>
