@@ -10,15 +10,15 @@ public class SelectListModel {
     private String selected;
     private String newName;
     private String newDescription;
-    private String selectedPath;
+    private String selectedName;
     private Document currentDoc;
 
-    public void setSelectedPath(String selectedPath) {
-        this.selectedPath = selectedPath;
+    public void setSelectedName(String selectedName) {
+        this.selectedName = selectedName;
     }
 
-    public String getSelectedPath() {
-        return selectedPath;
+    public String getSelectedName() {
+        return selectedName;
     }
 
     public void setCurrentDoc(Document currentDoc) {

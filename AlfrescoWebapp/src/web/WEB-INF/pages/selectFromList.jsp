@@ -43,8 +43,8 @@
     <p>
         <b>Edit:</b> <br>
         <form:form method="POST" action="/selectFromList">
-            <form:label path="selectedPath">Current File (read-only):</form:label>
-            <form:input readonly="true" width="200" value= "/User Homes/abbott/${docName}" path="selectedPath"/><br>
+            <form:label path="selectedName">Current File (read-only):</form:label>
+            <form:input readonly="true" width="200" value= "${docName}" path="selectedName"/><br>
             <form:label path="newName">Name: </form:label>
             <form:input path="newName"/><br>
             <form:label path="newDescription">Description: </form:label>

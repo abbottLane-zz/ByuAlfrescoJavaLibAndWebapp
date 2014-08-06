@@ -22,8 +22,8 @@ import javax.annotation.Resource;
 public class GetByPathController {
 
     @Resource(lookup="cmis")
-    CmisSessionService sessionService;
-    CMISSessionInterface session;
+    private CmisSessionService sessionService;
+    private CMISSessionInterface session;
 
     @RequestMapping(value="/byPath", method = RequestMethod.GET)
     public ModelAndView ByPathForm() {

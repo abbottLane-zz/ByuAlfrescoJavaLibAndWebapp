@@ -40,6 +40,7 @@ public class LoginController {
 
             sessionService.setSession(session);
             sessionService.setUsername(loginModel.getUser());
+            sessionService.setPassword((loginModel.getPassword()));
 
         }
         catch(Exception e){

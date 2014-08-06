@@ -1,6 +1,7 @@
 package com.springapp.mvc.Controllers;
 
 import com.springapp.mvc.models.SelectListModel;
+import com.springapp.mvc.service.CmisSessionService;
 import edu.byu.oit.core.cmis.CMISInterface.CMISSessionInterface;
 import edu.byu.oit.core.cmis.CMISInterface.IObjectID;
 import org.apache.chemistry.opencmis.client.api.CmisObject;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,16 +26,15 @@ import java.util.Map;
 @Controller
 public class selectListController {
 
+    @Resource(lookup="cmis")
+    private CmisSessionService sessionService;
     private CMISSessionInterface session;
 
     @RequestMapping(value="/selectFromList", method = RequestMethod.GET)
     public ModelAndView loadPage(@ModelAttribute("SpringWeb")SelectListModel selectModel, ModelMap model){
 
         //ESTABLISH the connection
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        session = (CMISSessionInterface)context.getBean("test");
-        session.setCredentials("admin", "Iamb0b123");
-        session.startSession();
+        session = sessionService.getSession();
 
         //POPULATE the dropdown model
         populateDropdown(session, selectModel, model);
@@ -43,7 +44,12 @@ public class selectListController {
     }
 
     private void populateDropdown(CMISSessionInterface session,SelectListModel selectModel, ModelMap model) {
-        IObjectID rootFolderId = session.getObjectIdByPath("/User Homes/abbott/");
+
+
+        String userHome;
+        if(sessionService.getUsername().equals("admin")){ userHome="abbott";}
+        else{userHome=sessionService.getUsername();}
+        IObjectID rootFolderId = session.getObjectIdByPath("/User Homes/"+userHome+"/");
         Folder folder = session.getFolder(rootFolderId.toString());
         ItemIterable<CmisObject> items = session.getFolderContents(folder);
 
@@ -67,18 +73,19 @@ public class selectListController {
     public ModelAndView execute(@ModelAttribute("SpringWeb")SelectListModel selectModel, ModelMap model){
 
         //ESTABLISH the connection
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        session = (CMISSessionInterface)context.getBean("test");
-        session.setCredentials("admin", "Iamb0b123");
-        session.startSession();
+        session=sessionService.getSession();
 
         //CHECK and EDIT information if needed
         boolean editPerformed=false;
         if(performEdit(selectModel)){
             editPerformed=true;
 
-            String pathToFile = selectModel.getSelectedPath();
-            Document doc = session.getDocumentByPath(pathToFile);
+
+            String userHome;
+            if(sessionService.getUsername().equals("admin")){ userHome="abbott";}
+            else{userHome=sessionService.getUsername();}
+            StringBuilder pathToFile = new StringBuilder("/User Homes/" + userHome +"/"+ selectModel.getSelectedName());
+            Document doc = session.getDocumentByPath(pathToFile.toString());
 
             if(selectModel.getNewName() != null && !selectModel.getNewName().equals("")){
                 session.updateDocumentName(selectModel.getNewName(), doc.getId());
@@ -112,8 +119,12 @@ public class selectListController {
         if(!editPerformed) {
             //DISPLAY submitted result (if no edits were performed)
             String docname = selectModel.getSelected();
+
+            String userHome;
+            if(sessionService.getUsername().equals("admin")){ userHome="abbott";}
+            else{userHome=sessionService.getUsername();}
             if(docname!=null) {
-                IObjectID objectid = session.getObjectIdByPath("/User Homes/abbott/" + docname);
+                IObjectID objectid = session.getObjectIdByPath("/User Homes/"+userHome+"/" + docname);
                 Document doc = session.getDocument(objectid.toString());
                 selectModel.setCurrentDoc(doc);
 
