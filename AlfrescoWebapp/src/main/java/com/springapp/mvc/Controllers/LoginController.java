@@ -26,7 +26,10 @@ public class LoginController {
     CmisSessionService sessionService;
 
     @RequestMapping(value="/", method = RequestMethod.GET)
-    public ModelAndView loginPageLoad() {
+    public ModelAndView loginPageLoad(@ModelAttribute("SpringWeb")LoginModel loginModel, ModelMap model) {
+        sessionService.setPassword(null);
+        sessionService.setUsername(null);
+        sessionService.setSession(null);
         return new ModelAndView("index", "login", new LoginModel());
     }
 

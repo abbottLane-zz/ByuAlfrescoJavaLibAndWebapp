@@ -21,11 +21,16 @@
     background: #83D1FF;
     color: whitesmoke;
 }
-a:hover, a.on, a.tabs{
+
+a:hover{
     color: whitesmoke;
     background-color: #6badd6;
 }
 
+#nav #logout:hover{
+    background: #ff585b;
+    color: whitesmoke;
+}
 #imgRef:hover{
     background-color: transparent;
 }
