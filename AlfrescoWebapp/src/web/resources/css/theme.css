@@ -27,7 +27,7 @@ a:hover{
     background-color: #6badd6;
 }
 
-#nav #logout:hover{
+a.logout:hover{
     background: #ff585b;
     color: whitesmoke;
 }

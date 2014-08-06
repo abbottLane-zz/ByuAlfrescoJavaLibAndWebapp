@@ -14,7 +14,7 @@
     <li class="tab-title"><a href="<c:url value="/upload"/>"><b>Upload</b></a></li>
     <li class="tab-title"> <a href="<c:url value="/selectFromList"/>"><b>Select and Edit</b></a></li>
     <li class="tab-title"><a href="<c:url value="/videoDemo"/>"><b>Video</b></a></li>
-    <li class="tab-title" id="logout"><a href="<c:url value="/"/>"><b>Logout</b></a></li>
+    <li class="tab-title"><a class="logout" href="<c:url value="/"/>"><b>Logout</b></a></li>
 </ul>
 
 <!-- form -->
