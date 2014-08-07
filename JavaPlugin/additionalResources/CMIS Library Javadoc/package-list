@@ -1,0 +1,8 @@
+edu.byu.oit.core.cmis.CMISAbstract
+edu.byu.oit.core.cmis.CMISInterface
+edu.byu.oit.core.cmis.CmisUtilClasses
+edu.byu.oit.core.cmis.Main
+edu.byu.oit.core.cmis.Sessions
+edu.byu.oit.core.cmis.tests.AbstractClassTests
+edu.byu.oit.core.cmis.tests.CMISAbstract
+edu.byu.oit.core.cmis.tests.CmisUtilClasses

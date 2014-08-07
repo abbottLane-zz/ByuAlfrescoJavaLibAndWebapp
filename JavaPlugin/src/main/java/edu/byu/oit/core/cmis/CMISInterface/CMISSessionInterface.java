@@ -313,9 +313,9 @@ public interface CMISSessionInterface {
      */
     public ContentStream createDocumentContentStream(String newName, String filePath);
     /**
-     *
-     * @param doc
-     * @return
+     * The method takes a CMIS Document as an argument and tells you whether or not Alfresco autogenerates thumbnail images for that particular document.
+     * @param doc The Document whose Alfresco thumbnail situation you want to know about.
+     * @return Returns True if Alfresco auto-generates a thumbnail for the Document's mimetype.
      */
     public Boolean doesAlfrescoThumbnailExist(Document doc);
 

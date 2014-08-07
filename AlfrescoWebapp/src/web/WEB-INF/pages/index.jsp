@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>Alfresco Webapp Login</h1>
-        <!-- Mehtod == method, action == action, commandName == the method in the controller we want to call -->
+        <!-- Method == method, action == action, commandName == the method in the controller we want to call -->
         <form:form method="post" action="login" commandName="login" role="form">
         <div class="form-group">
             <form:label path="user">Username:</form:label>
@@ -31,7 +31,5 @@
             </c:if>
         </div>
     </div>
-
-
 </body>
 </html>
