@@ -44,23 +44,22 @@
     <p>
         <b>Edit:</b> <br>
         <form:form method="POST" action="/selectFromList">
-            <form:label path="selectedName">Current File (read-only):</form:label>
+            <form:label path="selectedName">Current File:</form:label>
             <form:input readonly="true" width="200" value= "${docName}" path="selectedName"/><br>
-            <form:label path="newName">Name: </form:label>
+            <form:label path="newName">Change Name to: </form:label>
             <form:input path="newName"/><br>
-            <form:label path="newDescription">Description: </form:label>
+            <form:label path="newDescription">Change Description to: </form:label>
             <form:textarea value="${docDescription}" path="newDescription"/>
             <br>
             <input type="submit" value="Submit"/>
         </form:form>
-
     </p>
 </c:if>
   <c:if test="${didNameChange ==true}">
-      <p><b>Name change to ${newName} was successful.</b></p>
+      <p class="successMessage"><b>Name change to ${newName} was successful.</b></p>
 </c:if>
 <c:if test="${didDescriptionChange ==true}">
-    <p><b>The description for ${newName} was successfully updated.</b></p>
+    <p class="successMessage"><b>The description was successfully updated.</b></p>
 </c:if>
 <c:if test="${noEditsMade==true}">
     <p><b>No edits made</b></p>

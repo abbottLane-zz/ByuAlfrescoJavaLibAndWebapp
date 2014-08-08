@@ -8,7 +8,7 @@
   </component>
   <component name="IdProvider" IDEtalkID="E6A0DA5E794AB0F31E40F9A1BACA8C12" />
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/additionalResources/Javadoc" />
     <option name="OPTION_SCOPE" value="protected" />
     <option name="OPTION_HIERARCHY" value="true" />
     <option name="OPTION_NAVIGATOR" value="true" />

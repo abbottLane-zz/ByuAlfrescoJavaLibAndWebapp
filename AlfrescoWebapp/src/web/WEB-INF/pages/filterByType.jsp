@@ -34,8 +34,6 @@
     <input type="submit" value="Submit">
 
 </form:form>
-        ...
-
 </div>
 
 <!-- results -->
