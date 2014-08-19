@@ -107,12 +107,12 @@ public class AlfrescoSession extends AbstractCMISSession {
 
         if (boxName.equals("prod") || boxName.equals("prd")) {
             result = "http://inigo:8080/";
-            //result = "https://alfresco.byu.edu:8080/";
+            //result = "https://alfresco.byu.edu/";
         } else if (boxName.equals("stage") || boxName.equals("stg")) {
             result = "http://wakko:8080/";
-            //result= "https://alfresco-stg.byu.edu:8080/";
+            //result= "https://alfresco-stg.byu.edu/";
         } else if (boxName.equals("test") || boxName.equals("tst") || boxName.equals("dev")) {
-            //result = "http://alfresco-dev.:8080/";
+            //result = "https://alfresco-dev.byu.edu/";
             result="http://brainiac:8080/";
         } else {
             result = "http://" + boxName + ":8080/";

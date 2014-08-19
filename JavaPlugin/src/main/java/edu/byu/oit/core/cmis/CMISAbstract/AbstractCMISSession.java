@@ -422,8 +422,6 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         String objectType = extractObjectType(queryString);
 
-//        System.out.println("EXECUTE QUERY: QUERY EXECUTED THERE WAS BLOOD EVERYWHERE");
-
         // get the query name of cmis:objectId
         ObjectType type = session.getTypeDefinition(objectType);
         PropertyDefinition<?> objectIdPropDef = type.getPropertyDefinitions().get(PropertyIds.OBJECT_ID);
@@ -432,6 +430,8 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         //execute query
         ItemIterable<QueryResult> results = session.query(queryString, false);
+
+        System.out.println("OBJECT ID: "+queryString);
         return results;
     }
 

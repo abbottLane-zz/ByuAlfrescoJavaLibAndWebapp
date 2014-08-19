@@ -65,7 +65,7 @@ ul li a {
 
     /*float: left;*/
     /* some height would be nice */
-    line-height: 3em;
+    line-height: 1.2em;
     /* adjusting height */
     display: block; /* or inline-block */
 }
