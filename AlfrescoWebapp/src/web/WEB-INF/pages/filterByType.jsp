@@ -25,7 +25,7 @@
     filetype to retrieve filtered query results:</p>
 
 
-<form:form method="POST" action="/filterByType">
+<form:form method="POST" action="./filterByType">
     <form:radiobutton path="filetype" value="image"/>Images
     <form:radiobutton path="filetype" value="txt"/>Text
     <form:radiobutton path="filetype" value="mp3"/>Audio

@@ -20,7 +20,7 @@
 <!-- form -->
 <div id="form">
     <p>The dropdown has been hard-coded to contain all the items located in you user root folder.<br>Please browse and select the file you would like to view:</p>
-    <form:form method="POST" action="/selectFromList">
+    <form:form method="POST" action="./selectFromList">
         <form:select path="selected" commandName="selected">
             <form:option value="NONE" label="--- Select ---"/>
             <form:options items="${selectModel}"/>

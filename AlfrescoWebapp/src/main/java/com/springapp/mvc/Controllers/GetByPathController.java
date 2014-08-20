@@ -59,16 +59,16 @@ public class GetByPathController {
         }
         else{ // allow for the use of custom thumbnail images
             if(doc.getContentStreamMimeType().contains("text")) {
-                thumbUrl = "/resources/additionalResources/customThumbImages/docThumb.png";
+                thumbUrl = "./resources/additionalResources/customThumbImages/docThumb.png";
             }
             else if(doc.getContentStreamMimeType().contains("audio")){
-                thumbUrl= "/resources/additionalResources/customThumbImages/musicThumb.png";
+                thumbUrl= "./resources/additionalResources/customThumbImages/musicThumb.png";
             }
             else if (doc.getContentStreamMimeType().contains("video")){
-                thumbUrl=" /resources/additionalResources/customThumbImages/videoThumb.png";
+                thumbUrl="./resources/additionalResources/customThumbImages/videoThumb.png";
             }
             else{
-                thumbUrl = "/resources/additionalResources/customThumbImages/docThumb.png";
+                thumbUrl = "./resources/additionalResources/customThumbImages/docThumb.png";
             }
         }
         String fullUrl = session.getAlfrescoDocumentUrl(doc);
