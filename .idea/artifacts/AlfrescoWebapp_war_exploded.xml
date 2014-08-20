@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="AlfrescoWebapp:war exploded">
-    <output-path>$PROJECT_DIR$/AlfrescoWebapp/target/AlfrescoWebapp-1.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/AlfrescoWebapp/target/AlfrescoWebapp-1.1-SNAPSHOT</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="AlfrescoWebapp/web/Web" />
       <element id="directory" name="WEB-INF">

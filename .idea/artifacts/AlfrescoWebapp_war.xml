@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="AlfrescoWebapp:war">
     <output-path>$PROJECT_DIR$/AlfrescoWebapp/target</output-path>
-    <root id="archive" name="AlfrescoWebapp-1.0-SNAPSHOT.war">
+    <root id="archive" name="AlfrescoWebapp-1.1-SNAPSHOT.war">
       <element id="artifact" artifact-name="AlfrescoWebapp:war exploded" />
     </root>
   </artifact>

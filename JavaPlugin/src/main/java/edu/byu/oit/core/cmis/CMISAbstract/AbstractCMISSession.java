@@ -208,7 +208,16 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
 
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getBoxNameUrl() + "alfresco/service/api/node/workspace/SpacesStore/" + shortId + "/content/thumbnails/doclib?" + ticket + "&c=queue&ph=true");
+
+        //map boxname to correct reverse proxy url
+        String proxy="https://alfresco-dev.byu.edu/"; // default box is dev
+        if(this.getBoxNameUrl().equals("http://wakko:8080/")){
+            proxy="https://alfresco-stg.byu.edu/";
+        }
+        else if (this.getBoxNameUrl().equals("http://inigo:8080/")){
+            proxy="https://alfresco.byu.edu/";
+        }
+        sb.append(proxy + "alfresco/service/api/node/workspace/SpacesStore/" + shortId + "/content/thumbnails/doclib?" + ticket + "&c=queue&ph=true");
 
         return sb.toString();
 
@@ -243,7 +252,18 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         // Build the URL
         StringBuilder fullImage = new StringBuilder();
-        fullImage.append(this.getBoxNameUrl() +"alfresco/s/api/node/content/workspace/SpacesStore/" + shortId + "/" + docName + "/?" +ticket);
+
+        //map boxname to correct reverse proxy url
+        String proxy="https://alfresco-dev.byu.edu/"; // default box is dev
+        if(this.getBoxNameUrl().equals("http://wakko:8080/")){
+            proxy="https://alfresco-stg.byu.edu/";
+        }
+        else if (this.getBoxNameUrl().equals("http://inigo:8080/")){
+            proxy="https://alfresco.byu.edu/";
+        }
+
+
+        fullImage.append(proxy +"alfresco/s/api/node/content/workspace/SpacesStore/" + shortId + "/" + docName + "/?" +ticket);
 
         return fullImage.toString();
     }
