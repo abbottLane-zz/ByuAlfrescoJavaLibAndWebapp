@@ -61,19 +61,14 @@ public class Lister {
         ItemIterable<CmisObject> items = session.getFolderContents(root);
 
         for (CmisObject obj : items) {
-            //System.out.println(obj.getBaseType().toString());
             if (obj.getBaseType().getId().equals("cmis:document")) {
                 Document doc = (Document) obj;
                 sb.append(getIndents(indents) + doc.getName());
                 sb.append("\n");
-
-
             } else if (obj.getBaseType().getId().equals("cmis:folder")) {
                 Folder fol = (Folder) obj;
                 listItems(fol, sb, session, indents);
-
             }
-
         }
         indents--;
     }
