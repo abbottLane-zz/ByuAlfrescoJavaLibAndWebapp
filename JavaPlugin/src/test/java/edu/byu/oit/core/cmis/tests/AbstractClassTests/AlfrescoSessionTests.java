@@ -69,12 +69,10 @@ public class AlfrescoSessionTests {
 
         //DELETE the image
         session.deleteDocument(doc.getId());
-
     }
 
     @Test
     public void testUploadFolder() throws Exception {
-
 
         //UPLOAD test folder
         IObjectID rootFolderId = session.getObjectIdByPath("/User Homes/abbott/test");
