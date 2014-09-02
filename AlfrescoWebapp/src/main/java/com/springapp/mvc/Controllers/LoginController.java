@@ -37,21 +37,21 @@ public class LoginController {
     public ModelAndView loginAction(@ModelAttribute("SpringWeb")LoginModel loginModel, ModelMap model){
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-            session = (CMISSessionInterface) context.getBean("test");
+            session = (CMISSessionInterface) context.getBean(loginModel.getEnvironment());
             session.setCredentials(loginModel.getUser() ,loginModel.getPassword());
             session.startSession();
 
             sessionService.setSession(session);
             sessionService.setUsername(loginModel.getUser());
             sessionService.setPassword((loginModel.getPassword()));
-
+            sessionService.setEnvironment(loginModel.getEnvironment());
         }
         catch(Exception e){
             model.addAttribute("loginError", true);
+            model.addAttribute("errorEnvironment", loginModel.getEnvironment());
             return new ModelAndView("index", "login", new LoginModel());
-            //return "redirect:/";
         }
-        //return "redirect:/byPath";
+
         return new ModelAndView("path", "command", new ByPathForm());
     }
 }

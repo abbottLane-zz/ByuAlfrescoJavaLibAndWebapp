@@ -22,12 +22,19 @@
             <form:label path="password">Password:</form:label>
             <form:input path="password" type= "password" class="form-control" placeholder="Password"/>
         </div>
+        <form:select path="environment" commandName="environment">
+            <form:option value="dev" label="dev"/>
+            <form:option value="stg" label="stg"/>
+            <form:option value="prd" label="prod"/>
+        </form:select>
+        <br>
+        <br>
         <button type="submit" class="btn btn-default">Login</button>
         </form:form>
 
         <div class="errorMessage">
             <c:if test="${loginError == true}">
-                <p>Invalid user credentials</p>
+                <p>Invalid user credentials for environment: ${errorEnvironment}</p>
             </c:if>
         </div>
     </div>

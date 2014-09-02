@@ -3,7 +3,18 @@ package com.springapp.mvc.models;
 public class LoginModel {
     private String user;
     private String password;
+    private String environment;
+
     private boolean invalidLogin;
+
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
 
     public void setInvalidLogin(boolean invalidLogin) {
         this.invalidLogin = invalidLogin;

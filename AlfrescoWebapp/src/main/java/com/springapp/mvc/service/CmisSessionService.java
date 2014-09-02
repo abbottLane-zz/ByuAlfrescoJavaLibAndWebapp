@@ -10,8 +10,18 @@ public class CmisSessionService {
     private CMISSessionInterface session;
     private String username;
     private String password;
+    private String environment;
 
     public CmisSessionService(){}
+
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
 
     public void setSession(CMISSessionInterface session) {
         this.session = session;
