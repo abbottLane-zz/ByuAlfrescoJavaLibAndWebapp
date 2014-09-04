@@ -47,6 +47,9 @@ public class LoginController {
             sessionService.setUsername(loginModel.getUser());
             sessionService.setPassword((loginModel.getPassword()));
             sessionService.setEnvironment(loginModel.getEnvironment());
+
+            model.addAttribute("environment", sessionService.getEnvironment());
+            model.addAttribute("user", sessionService.getUsername());
         }
         catch(Exception e){
             model.addAttribute("loginError", true);
