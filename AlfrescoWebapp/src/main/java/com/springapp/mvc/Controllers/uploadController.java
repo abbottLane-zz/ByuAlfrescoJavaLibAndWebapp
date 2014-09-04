@@ -26,7 +26,10 @@ public class uploadController {
     private CMISSessionInterface session;
 
     @RequestMapping(value="/upload", method = RequestMethod.GET)
-    public ModelAndView uploadView() {
+    public ModelAndView uploadView(ModelMap model) {
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
+
         return new ModelAndView("upload", "command", new uploadRequestModel());
     }
 
@@ -76,6 +79,8 @@ public class uploadController {
         model.addAttribute("docName", doc.getName());
         model.addAttribute("thumbUrl", thumbUrl);
         model.addAttribute("fullUrl", fullUrl);
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
 
         //Return the model and view
         return new ModelAndView("upload", "command", new uploadRequestModel());

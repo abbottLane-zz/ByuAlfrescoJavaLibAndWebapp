@@ -1,6 +1,7 @@
 package com.springapp.mvc.Controllers;
 
 import com.springapp.mvc.models.videoModel;
+import com.springapp.mvc.service.CmisSessionService;
 import edu.byu.oit.core.cmis.CMISInterface.CMISSessionInterface;
 import edu.byu.oit.core.cmis.CMISInterface.IObjectID;
 import org.apache.chemistry.opencmis.client.api.Document;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
+
 
 @Controller
 public class videoController {
 
     CMISSessionInterface session;
+    @Resource(lookup="cmis")
+    CmisSessionService sessionService;
 
     @RequestMapping(value = "/videoDemo", method = RequestMethod.GET)
     public ModelAndView loadPage(@ModelAttribute("SpringWeb")videoModel video, ModelMap model){
@@ -36,6 +41,8 @@ public class videoController {
         //PUT video Url into the ModelMap
         System.out.println("Video URL: " + videoUrl);
         model.addAttribute("video", videoUrl);
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
 
         return new ModelAndView("videoDemo", "command", new videoModel());
     }

@@ -29,7 +29,9 @@ public class FilterByTypeController {
     CMISSessionInterface session;
 
     @RequestMapping(value="/filterByType", method = RequestMethod.GET)
-    public ModelAndView loadPage() {
+    public ModelAndView loadPage(ModelMap model) {
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
         return new ModelAndView("filterByType", "command", new QueryModel());
     }
 
@@ -97,6 +99,8 @@ public class FilterByTypeController {
         model.addAttribute("fullUrlList", fullUrls);
         model.addAttribute("numberOfResults", resultsNum);
         model.addAttribute("documentNames", docNames);
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
 
         //Return the model and view
         return new ModelAndView("filterByType", "command", new QueryModel());

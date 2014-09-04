@@ -108,6 +108,10 @@ ul li a {
     overflow: hidden;
 
 }
+#sessionInfo
+{
+    text-align: right;
+}
 img {
     opacity: .4;
 }

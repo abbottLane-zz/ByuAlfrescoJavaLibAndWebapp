@@ -39,6 +39,10 @@ public class selectListController {
         //POPULATE the dropdown model
         populateDropdown(session, selectModel, model);
 
+        //populate session info
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
+
         //RETURN Model and View
         return new ModelAndView("selectFromList", "command", selectModel);
     }
@@ -152,6 +156,8 @@ public class selectListController {
                 model.addAttribute("full", fullUrl);
                 model.addAttribute("docName", doc.getName());
                 model.addAttribute("docDescription", doc.getProperty("cm:description").getValueAsString());
+                model.addAttribute("environment", sessionService.getEnvironment());
+                model.addAttribute("user", sessionService.getUsername());
             }
             else{
                 model.addAttribute("noEditsMade", true);

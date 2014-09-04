@@ -30,6 +30,8 @@ public class LoginController {
         sessionService.setPassword(null);
         sessionService.setUsername(null);
         sessionService.setSession(null);
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
         return new ModelAndView("index", "login", new LoginModel());
     }
 

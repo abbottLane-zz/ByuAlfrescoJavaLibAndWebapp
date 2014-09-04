@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="https://www.byu.edu/templates/2.1.5/images/favicon.ico">
 </head>
 <body>
+<div id="sessionInfo">Logged into ${environment} as ${user}</div>
 <ul id="nav" class="tabs" data-tab>
     <li class="tab-title"><a href="<c:url value="/byPath"/>"><b>Get by Path</b></a></li>
     <li class="tab-title"><a href="<c:url value="/filterByType"/>"><b>Filter by file type</b></a></li>

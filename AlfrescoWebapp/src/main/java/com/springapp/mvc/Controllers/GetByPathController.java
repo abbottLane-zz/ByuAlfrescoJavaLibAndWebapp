@@ -26,7 +26,10 @@ public class GetByPathController {
     private CMISSessionInterface session;
 
     @RequestMapping(value="/byPath", method = RequestMethod.GET)
-    public ModelAndView ByPathForm() {
+    public ModelAndView ByPathForm(ModelMap model) {
+
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
         return new ModelAndView("path", "command", new ByPathForm());
     }
 
@@ -78,6 +81,8 @@ public class GetByPathController {
         model.addAttribute("docName", doc.getName());
         model.addAttribute("docDescription", doc.getProperty("cm:description").getValueAsString());
         model.addAttribute("fullUrl", fullUrl);
+        model.addAttribute("environment", sessionService.getEnvironment());
+        model.addAttribute("user", sessionService.getUsername());
 
         //Return the model and view
         return new ModelAndView("path", "command", pathModel);
