@@ -29,7 +29,7 @@ public class AlfrescoSession extends AbstractCMISSession {
 
     @Required
     public void setBoxName(String boxName) {
-        this.boxName = boxName;
+        this.boxNameUrl = boxName;
     }
 
     //Override of the initializeSession() method: establishes a session with the designated box
@@ -41,7 +41,7 @@ public class AlfrescoSession extends AbstractCMISSession {
         parameter.put(SessionParameter.USER, username);
         parameter.put(SessionParameter.PASSWORD, password);
         //"http://wakko:8080/alfresco/cmisatom"
-        parameter.put(SessionParameter.ATOMPUB_URL, getURL(boxName)+"alfresco/cmisatom");
+        parameter.put(SessionParameter.ATOMPUB_URL, boxNameUrl+"alfresco/cmisatom");
 
         parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
         parameter.put(SessionParameter.OBJECT_FACTORY_CLASS, "org.alfresco.cmis.client.impl.AlfrescoObjectFactoryImpl");
@@ -50,16 +50,16 @@ public class AlfrescoSession extends AbstractCMISSession {
         SessionFactory factory = SessionFactoryImpl.newInstance();
         setSession(factory.getRepositories(parameter).get(0).createSession());
 
-        setTicket(boxName, username, password);
+        setTicket(boxNameUrl, username, password);
 
     }
 
-    private void setTicket(String boxName, String username, String password) {
+    private void setTicket(String boxNameUrl, String username, String password) {
         URL url;
         HttpURLConnection connection;
         try {
             String urlParameters = "{ \"username\" : \""+username + "\", \"password\" : \"" + password + "\" }";
-            url= new URL(getURL(boxName)+"alfresco/service/api/login");
+            url= new URL(boxNameUrl+"alfresco/service/api/login");
             connection = (HttpURLConnection)url.openConnection();
 
             connection.setRequestMethod("POST");
@@ -103,23 +103,23 @@ public class AlfrescoSession extends AbstractCMISSession {
     // Returns: base url, ie: http://wakko:8080/
     private String getURL(String boxName) {
         // Specify the connection settings
-        String result;
-
-        if (boxName.equals("prod") || boxName.equals("prd")) {
-            result = "http://inigo:8080/";
-            //result = "https://alfresco.byu.edu/";
-        } else if (boxName.equals("stage") || boxName.equals("stg")) {
-            result = "http://wakko:8080/";
-            //result= "https://alfresco-stg.byu.edu/";
-        } else if (boxName.equals("test") || boxName.equals("tst") || boxName.equals("dev")) {
-            //result = "https://alfresco-dev.byu.edu/";
-            result="http://brainiac:8080/";
-        } else {
-            result = "http://" + boxName + ":8080/";
-        }
-
-        boxNameUrl=result;
-        return boxNameUrl;
+//        String result;
+//
+//        if (boxName.equals("prod") || boxName.equals("prd")) {
+//            result = "http://inigo:8080/";
+//            //result = "https://alfresco.byu.edu/";
+//        } else if (boxName.equals("stage") || boxName.equals("stg")) {
+//            result = "http://wakko:8080/";
+//            //result= "https://alfresco-stg.byu.edu/";
+//        } else if (boxName.equals("test") || boxName.equals("tst") || boxName.equals("dev")) {
+//            //result = "https://alfresco-dev.byu.edu/";
+//            result="http://brainiac:8080/";
+//        } else {
+//            result = "http://" + boxName + ":8080/";
+//        }
+//
+//        boxNameUrl=result;
+        return boxName;
     }
 
     @Override

@@ -10,52 +10,26 @@
     <context:annotation-config/>
 <!-- Alfresco Beans -->
     <bean id="prod" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="prod"/>
+        <property name="boxName" value="http://inigo:8080/"/>
     </bean>
     <bean id="prd" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="prd"/>
+        <property name="boxName" value="http://inigo:8080/"/>
     </bean>
     <bean id="stage" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="stage"/>
+        <property name="boxName" value="http://wakko:8080/"/>
     </bean>
     <bean id="stg" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="stg"/>
+        <property name="boxName" value="shttp://wakk0:8080/"/>
     </bean>
     <bean id="test" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="test"/>
+        <property name="boxName" value="http://brainiac:8080/"/>
     </bean>
     <bean id="dev" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="dev"/>
+        <property name="boxName" value="http://brainiac:8080/"/>
     </bean>
-    <bean id="buggs1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="buggs1"/>
-    </bean>
-    <bean id="pinky11" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="pinky11"/>
-    </bean>
-    <bean id="wakko1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko1"/>
-    </bean>
-    <bean id="wakko2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko2"/>
-    </bean>
-    <bean id="brainiac11" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko2"/>
-    </bean>
-    <bean id="inigo1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko2"/>
-    </bean>
-    <bean id="inigo2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko2"/>
-    </bean>
-    <bean id="fish1" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="wakko2"/>
-    </bean>
-    <bean id="yakko2" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="yakko2"/>
-    </bean>
+
     <bean id="brainiac-old" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="brainiac-old"/>
+        <property name="boxName" value="http://brainiac-old:8080"/>
     </bean>
 
 <!-- Sharepont Beans -->
