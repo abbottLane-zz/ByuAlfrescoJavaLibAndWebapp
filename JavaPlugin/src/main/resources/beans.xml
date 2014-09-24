@@ -9,6 +9,12 @@
 
     <context:annotation-config/>
 <!-- Alfresco Beans -->
+    <bean id="mav" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="${server.name}"/>
+    </bean>
+
+<!---->
+
     <bean id="prod" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="http://inigo:8080/"/>
     </bean>
@@ -19,7 +25,7 @@
         <property name="boxName" value="http://wakko:8080/"/>
     </bean>
     <bean id="stg" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
-        <property name="boxName" value="shttp://wakk0:8080/"/>
+        <property name="boxName" value="http://wakk0:8080/"/>
     </bean>
     <bean id="test" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="http://brainiac:8080/"/>
