@@ -22,11 +22,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Alfresco Rpm" />
+        <module name="AlfrescoRpm" />
         <module name="AlfrescoWebapp" />
         <module name="JavaPlugin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Alfresco Rpm" target="1.5" />
+      <module name="AlfrescoRpm" target="1.5" />
       <module name="AlfrescoWebapp" target="1.5" />
       <module name="JavaPlugin" target="1.7" />
     </bytecodeTargetLevel>

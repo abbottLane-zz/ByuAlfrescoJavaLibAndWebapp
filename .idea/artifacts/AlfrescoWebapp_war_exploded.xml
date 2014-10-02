@@ -2,7 +2,6 @@
   <artifact type="exploded-war" name="AlfrescoWebapp:war exploded">
     <output-path>$PROJECT_DIR$/AlfrescoWebapp/target/AlfrescoWebapp-1.1-SNAPSHOT</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="AlfrescoWebapp/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="AlfrescoWebapp" />
@@ -48,6 +47,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.7" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="AlfrescoWebapp/web/Web" />
     </root>
   </artifact>
 </component>

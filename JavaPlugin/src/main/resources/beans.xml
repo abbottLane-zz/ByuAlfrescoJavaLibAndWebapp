@@ -9,7 +9,7 @@
 
     <context:annotation-config/>
 <!-- Alfresco Beans -->
-    <bean id="mav" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+    <bean id="mvnFilter" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="${server.name}"/>
     </bean>
 
