@@ -27,6 +27,36 @@
             <copyright>2014, William Lane</copyright>
             <description>RPM of java plugin and apache</description>
             <defaultDirmode>750</defaultDirmode>
+            <mappings>
+                <mapping>
+                    <directory>/opt/alfresco</directory>
+                    <sources>
+                        <source>
+                            <location>${basedir}/target/dependency/byualfresco-5.0.0.tgz</location>
+                        </source>
+                    </sources>
+                </mapping>
+                <mapping>
+                    <directory>/opt/alfresco/JavaLib</directory>
+                    <sources>
+                        <source>
+                            <location>${basedir}/../JavaPlugin/target/JavaPlugin-1.0-SNAPSHOT.jar</location>
+                        </source>
+                    </sources>
+                </mapping>
+                <mapping>
+                    <directory>/opt/alfresco/webappTemp</directory>
+                    <sources>
+                        <source>
+                            <location>${basedir}/../AlfrescoWebapp/target/AlfrescoWebapp-1.1-SNAPSHOT.war</location>
+                        </source>
+                    </sources>
+                </mapping>
+            </mappings>
+            <postinstallScriptlet>
+                <scriptFile>src/main/scripts/postinstall</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
+            </postinstallScriptlet>
         </configuration>
     </plugin>
     <plugin>
@@ -50,13 +80,19 @@
                             <type>war</type>
                             <version>1.1-SNAPSHOT</version>
                         </artifactItem>
+                        <artifactItem>
+                            <groupId>edu.byu.images.Alfresco</groupId>
+                            <artifactId>byualfresco</artifactId>
+                            <version>5.0.0</version>
+                            <type>tgz</type>
+
+                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </execution>
         </executions>
     </plugin>
 </plugins>
-
 </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
