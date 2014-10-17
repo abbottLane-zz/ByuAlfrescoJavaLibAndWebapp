@@ -20,7 +20,7 @@
         <extensions>true</extensions>
         <configuration>
             <group>edu.byu.oit.core.cmis</group>
-            <name>CmisJavaPluginRpm</name>
+            <name>ByuAlfresco5.0.0</name>
             <projversion>1.0</projversion>
             <releaseProperty>rpm.release</releaseProperty>
             <versionProperty>rpm.version</versionProperty>
@@ -32,7 +32,7 @@
                     <directory>/opt/alfresco</directory>
                     <sources>
                         <source>
-                            <location>${basedir}/target/dependency/byualfresco-5.0.0.tgz</location>
+                            <location>${basedir}/target/dependency/byualfrescoInstaller-5.0.0.tgz</location>
                         </source>
                     </sources>
                 </mapping>
@@ -82,7 +82,7 @@
                         </artifactItem>
                         <artifactItem>
                             <groupId>edu.byu.images.Alfresco</groupId>
-                            <artifactId>byualfresco</artifactId>
+                            <artifactId>byualfrescoInstaller</artifactId>
                             <version>5.0.0</version>
                             <type>tgz</type>
 

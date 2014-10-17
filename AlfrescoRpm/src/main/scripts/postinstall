@@ -1,7 +1,18 @@
 
 /bin/echo Unzipping tar...
-/bin/tar -xvf /opt/alfresco/byualfresco-5.0.0.tgz -C /opt/alfresco
+/bin/tar -xvf /opt/alfresco/byualfrescoInstaller-5.0.0.tgz -C /opt/
+
+/bin/echo installing alfresco via install_opt config...this could take a few minutes...
+/opt/Alfresco/alfresco-community-5.0.a-installer-linux-x64.bin --optionfile /opt/Alfresco/install_opts
 
 /bin/echo Deploying Alfresco test app to tomcat...
-/bin/scp /opt/alfresco/webappTemp/AlfrescoWebapp-1.1-SNAPSHOT.war /opt/alfresco/byuAlfresco5.0/tomcat/webapps
+/bin/scp /opt/alfresco/webappTemp/AlfrescoWebapp-1.1-SNAPSHOT.war /opt/alfresco5.0/tomcat/webapps
+
+/bin/echo Deploying JavaLib to alfresco home folder...
+/bin/scp /opt/alfresco/JavaLib /opt/alfresco5.0/
+
+/bin/echo cleaning up a bit...
+/bin/rm -R /opt/alfresco
+/bin/rm -R /opt/Alfresco
+
 
