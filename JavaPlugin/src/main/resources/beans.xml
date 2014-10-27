@@ -5,16 +5,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.w3.org/2001/XMLSchema-instance ">
 
     <context:annotation-config/>
-<!-- Alfresco Beans -->
+    <!-- Alfresco Beans -->
     <bean id="mvnFilter" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="${server.name}"/>
     </bean>
 
-<!---->
-
+    <!---->
+    <bean id="localhost" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
+        <property name="boxName" value="http://localhost:8080/"/>
+    </bean>
     <bean id="prod" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="http://inigo:8080/"/>
     </bean>
@@ -38,7 +41,7 @@
         <property name="boxName" value="http://brainiac-old:8080"/>
     </bean>
 
-<!-- Sharepont Beans -->
+    <!-- Sharepont Beans -->
     <bean id="sptest" class="edu.byu.oit.core.cmis.Sessions.AlfrescoSession">
         <property name="boxName" value="sharepointBoxName"/>
     </bean>

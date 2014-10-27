@@ -15,7 +15,9 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,23 +104,17 @@ public class AlfrescoSession extends AbstractCMISSession {
     // Supports: test/tst/dev, stage/stg, prod/prd, or the box name
     // Returns: base url, ie: http://wakko:8080/
     private String getURL(String boxName) {
-        // Specify the connection settings
-//        String result;
-//
-//        if (boxName.equals("prod") || boxName.equals("prd")) {
-//            result = "http://inigo:8080/";
-//            //result = "https://alfresco.byu.edu/";
-//        } else if (boxName.equals("stage") || boxName.equals("stg")) {
-//            result = "http://wakko:8080/";
-//            //result= "https://alfresco-stg.byu.edu/";
-//        } else if (boxName.equals("test") || boxName.equals("tst") || boxName.equals("dev")) {
-//            //result = "https://alfresco-dev.byu.edu/";
-//            result="http://brainiac:8080/";
-//        } else {
-//            result = "http://" + boxName + ":8080/";
-//        }
-//
-//        boxNameUrl=result;
+        //If you want to access the deployment attached to this webapp, you need the ip address of localhost
+        if(boxName.equals("localhost"))
+        {
+            try {
+                InetAddress ip = InetAddress.getLocalHost();
+                return "http://" + ip.getHostAddress() +":8080/";
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+        }
+
         return boxName;
     }
 

@@ -23,9 +23,10 @@
             <form:input path="password" type= "password" class="form-control" placeholder="Password"/>
         </div>
         <form:select path="environment" commandName="environment">
-            <form:option value="dev" label="dev"/>
-            <form:option value="stg" label="stg"/>
-            <form:option value="prd" label="prod"/>
+            <form:option value="localhost" label="My Alfresco Deployment"/>
+            <form:option value="dev" label="BYU Dev"/>
+            <form:option value="stg" label="BYU Stg"/>
+            <form:option value="prd" label="BYU Prod"/>
         </form:select>
         <br>
         <br>
