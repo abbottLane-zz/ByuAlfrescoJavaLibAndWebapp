@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +54,16 @@ public class AlfrescoSessionTests {
 
 
     //--------------------------- TESTS ---------------------------------------------
+    @Test
+    public void testGetIpAddress(){
+//        try {
+//            assertEquals("172.16.198.1", session.getIpAddress());
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
     @Test
     public void testUploadAndDeleteDocument() throws Exception {
 

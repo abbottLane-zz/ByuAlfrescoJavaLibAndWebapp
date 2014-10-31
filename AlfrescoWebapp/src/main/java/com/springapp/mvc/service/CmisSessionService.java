@@ -14,7 +14,6 @@ public class CmisSessionService {
 
     public CmisSessionService(){}
 
-
     public void setEnvironment(String environment) {
         this.environment = environment;
     }

@@ -319,4 +319,6 @@ public interface CMISSessionInterface {
      */
     public Boolean doesAlfrescoThumbnailExist(Document doc);
 
+    public String getIpAddress() throws InterruptedException, IOException;
+
 }

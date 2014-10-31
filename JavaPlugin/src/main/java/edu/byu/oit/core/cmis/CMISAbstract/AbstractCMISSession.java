@@ -25,6 +25,9 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -210,13 +213,25 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
         StringBuilder sb = new StringBuilder();
 
         //map boxname to correct reverse proxy url
-        String proxy="https://alfresco-dev.byu.edu/"; // default box is dev
+        String proxy="";
+
+        //default box is localhost
+        try {
+            proxy="http://"+InetAddress.getLocalHost().getHostAddress()+":8080/";
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
         if(this.getBoxNameUrl().equals("http://wakko:8080/")){
             proxy="https://alfresco-stg.byu.edu/";
         }
         else if (this.getBoxNameUrl().equals("http://inigo:8080/")){
             proxy="https://alfresco.byu.edu/";
         }
+        else if (this.getBoxNameUrl().equals("http://brainiac:8080/")){
+            proxy="https://alfresco-dev.byu.edu/";
+        }
+
         sb.append(proxy + "alfresco/service/api/node/workspace/SpacesStore/" + shortId + "/content/thumbnails/doclib?" + ticket + "&c=queue&ph=true");
 
         return sb.toString();
@@ -252,16 +267,31 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
 
         // Build the URL
         StringBuilder fullImage = new StringBuilder();
+        String proxy="";
 
-        //map boxname to correct reverse proxy url
-        String proxy="https://alfresco-dev.byu.edu/"; // default box is dev
+        //extract network ip address
+        String ipAddress="";
+        try {
+            ipAddress = getIpAddress();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //default box is localhost
+        proxy="http://"+ipAddress+":8080/";
+
+        //otherwise change box to a BYU server
         if(this.getBoxNameUrl().equals("http://wakko:8080/")){
             proxy="https://alfresco-stg.byu.edu/";
         }
         else if (this.getBoxNameUrl().equals("http://inigo:8080/")){
             proxy="https://alfresco.byu.edu/";
         }
-
+        else if (this.getBoxNameUrl().equals("http://brainiac:8080/")){
+            proxy="https://alfresco-dev.byu.edu/";
+        }
 
         fullImage.append(proxy +"alfresco/s/api/node/content/workspace/SpacesStore/" + shortId + "/" + docName + "/?" +ticket);
 
@@ -662,5 +692,26 @@ public abstract class AbstractCMISSession implements CMISSessionInterface {
             }
         }
         return result;
+    }
+
+    @Override
+    public String getIpAddress() throws InterruptedException, IOException
+    {
+        Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
+        while (e.hasMoreElements())
+        {
+            NetworkInterface n = e.nextElement();
+            System.out.println(n.getName());
+            Enumeration<InetAddress> ee = n.getInetAddresses();
+            int count=0;
+            while (ee.hasMoreElements())
+            {
+                InetAddress i = ee.nextElement();
+                System.out.println(i.getHostAddress());
+                if(count ==4){return i.getHostAddress();}
+                count++;
+            }
+        }
+        return ""; // Should never reach this: every computer has an ip address
     }
 }
